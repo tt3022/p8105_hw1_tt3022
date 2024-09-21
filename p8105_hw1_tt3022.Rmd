@@ -5,6 +5,7 @@ output: github_document
 run the library
 ```{r}
 library(ggplot2)
+library(tidyverse)
 ```
 
 # Problem 1
@@ -27,13 +28,15 @@ species: The species of the penguin
 
 island: The island where the penguin was observed
 
-bill_length_mm: The length of the penguin’s bill in millimeters
+bill_length_mm: The length of the penguin’s bill 
 
-flipper_length_mm: The length of the penguin’s flipper in millimeters
+flipper_length_mm: The length of the penguin’s flipper 
 
 We can clearly see that this dataset has 8 variables and 344 observation which mean it has 8 col and 344 row.
 
 we also find that the mean of flipper_length_mm is `r mean_flipper_length`
+
+
 
 Finally make a scatter plot
 ```{r}
@@ -45,7 +48,61 @@ ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)
   theme_minimal()
 ```
 
+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
 
 # Problem 2
+
+Generate the data(I did not create seed)
+```{r}
+normal_sample <- rnorm(10)
+logical_vector <- normal_sample > 0
+character_vector <- letters[1:10]  # first 10 letters
+factor_vector <- factor(rep(c("Level1", "Level2", "Level3"), length.out = 10))
+
+```
+
+Create a data frame
+```{r}
+df <- data.frame(
+  normal_sample = normal_sample,
+  logical_vector = logical_vector,
+  character_vector = character_vector,
+  factor_vector = factor_vector
+)
+
+```
+ 
+Try to take the mean of each variable
+
+```{r warning=FALSE}
+normal_mean <- mean(pull(df, normal_sample))
+logical_mean <- mean(pull(df, logical_vector))
+character_mean <- mean(pull(df, character_vector))  
+factor_mean <- mean(pull(df, factor_vector))
+```
+
+we can calculate the mean of normal_sample and logical_vector, but it failed on character_vector and factor_vector.
+here is the output of mean: normal_mean-`r normal_mean`, logical_mean-`r logical_mean`, character_mean-`r character_mean`, factor_mean-`r factor_mean`
+
+Coerce logical, character, and factor variables to numeric
+```{r eval = FALSE}
+logical_as_numeric <- as.numeric(df$logical_vector)
+character_as_numeric <- as.numeric(df$character_vector)
+factor_as_numeric <- as.numeric(df$factor_vector)
+
+```
+Only character is failed to convert. 
+The logical vector will be converted to 1 for TRUE and 0 for FALSE.
+The character can not convert to number.
+The Factors will be converted to integers.
+It does explain the what happens when I try to take mean, because the factor need one more  step to convert it to integer.
+
+
+
+
+
+
+
+
 
 
