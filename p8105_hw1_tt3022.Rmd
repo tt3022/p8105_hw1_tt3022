@@ -48,7 +48,6 @@ ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)
   theme_minimal()
 ```
 
-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
 
 # Problem 2
 
