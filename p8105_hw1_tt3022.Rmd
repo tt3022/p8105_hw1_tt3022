@@ -2,20 +2,49 @@
 title: "HW 1 document"
 output: github_document
 ---
-
-I'm an R Markdown document! 
-
-# Section 1
-
-Here's a **code chunk** that samples from 
-a _normal distribution_:
-
+run the library
 ```{r}
-samp = rnorm(100)
-length(samp)
+library(ggplot2)
 ```
 
-# Section 2
+# Problem 1
 
-I can take the mean of the sample, too!
-The mean is `r mean(samp)`.
+```{r}
+data("penguins", package = "palmerpenguins")
+```
+
+load the penguins dataset first
+
+```{r}
+str(penguins)
+nrow_penguins <- nrow(penguins)
+ncol_penguins <- ncol(penguins)
+mean_flipper_length <- mean(penguins$flipper_length_mm, na.rm = TRUE)
+```
+we first find the measurements for three species of penguins. Key variables include:
+
+species: The species of the penguin
+
+island: The island where the penguin was observed
+
+bill_length_mm: The length of the penguin’s bill in millimeters
+
+flipper_length_mm: The length of the penguin’s flipper in millimeters
+
+We can clearly see that this dataset has 8 variables and 344 observation which mean it has 8 col and 344 row.
+
+we also find that the mean of flipper_length_mm is `r mean_flipper_length`
+
+Finally make a scatter plot
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) +
+  geom_point() +
+  labs(title = "Scatterplot of Flipper Length vs Bill Length",
+       x = "Bill Length (mm)",
+       y = "Flipper Length (mm)") +
+  theme_minimal()
+```
+
+
+# Problem 2
+
